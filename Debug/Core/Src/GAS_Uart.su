@@ -1,0 +1,5 @@
+GAS_Uart.c:27:6:GAS_Uart_init	8	static
+GAS_Uart.c:30:6:GAS_Uart_sendMessage	8	static
+GAS_Uart.c:46:6:HAL_UART_RxCpltCallback	16	static
+GAS_Uart.c:60:11:GAS_Uart_encode	32	static
+GAS_Uart.c:78:6:GAS_Uart_decode	16	static
