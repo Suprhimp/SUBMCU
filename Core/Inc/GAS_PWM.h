@@ -17,10 +17,13 @@ typedef struct{
 	uint32_t Width;
 	uint32_t DutyCycle;
 	uint32_t Frequency;
+	uint32_t angle;
 }pwmIn_t;
 
 extern pwmIn_t pwmIn1;
 extern pwmIn_t pwmIn2;
+
+extern volatile uint8_t pwmChangeFlag;
 
 extern void GAS_PWM_inputInit(void);
 extern void GAS_PWM_outputInit(void);

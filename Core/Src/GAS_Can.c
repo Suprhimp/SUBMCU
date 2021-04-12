@@ -25,7 +25,7 @@ uint32_t TC237_ID = 0x237;
 void GAS_Can_txSetting(void);
 void GAS_Can_rxSetting(void);
 void GAS_Can_init(void);
-void GAS_Can_sendMessage(uint8_t sendData[8]);
+void GAS_Can_sendMessage(uint16_t Encoder1, uint16_t Encoder2);
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan);
 void HAL_CAN_ErrorCallback(CAN_HandleTypeDef* hcan);
 //void GAS_Can_recieveMessage(CAN_HandleTypeDef *hcan);
@@ -36,7 +36,7 @@ void GAS_Can_txSetting(void)
 	 * CAN tx set function
 	 * set ID, IDE, DLC
 	 */
-	canTxHeader.ExtId = STM32_ID2;
+	canTxHeader.ExtId = STM32_ID;
 	canTxHeader.IDE	= CAN_ID_EXT;
 	canTxHeader.RTR	= CAN_RTR_DATA;
 	canTxHeader.DLC	=	8;
@@ -52,8 +52,8 @@ void GAS_Can_rxSetting(void)
 	 * Set different FIFO and FilterBank
 	 *
 	 */
-	sFilterConfig.FilterIdHigh = (STM32_ID<<3)>>16;				/*first 2byte in 29bit (shift need to IED,RTR,0)*/
-	sFilterConfig.FilterIdLow = (0xffff & (STM32_ID << 3)) | (1<<2);	/*second 2byte in 29bit + IDE (shift need to IED,RTR,0/)*/
+	sFilterConfig.FilterIdHigh = (STM32_ID2<<3)>>16;				/*first 2byte in 29bit (shift need to IED,RTR,0)*/
+	sFilterConfig.FilterIdLow = (0xffff & (STM32_ID2 << 3)) | (1<<2);	/*second 2byte in 29bit + IDE (shift need to IED,RTR,0/)*/
 	sFilterConfig.FilterMaskIdHigh = (0x0fffffff<<3)>>16;
 	sFilterConfig.FilterMaskIdLow =(0xffff & (0x0FFFFFFF << 3)) | (1<<2);
 	sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;
@@ -110,13 +110,15 @@ void GAS_Can_init(void)
 
 }
 
-void GAS_Can_sendMessage(uint8_t sendData[8])
+void GAS_Can_sendMessage(uint16_t Encoder1, uint16_t Encoder2)
 {
 	/*
 	 * CAN send message function
 	 * send Message data with sendData[8]
 	 */
-	memmove(sendData, stm32_1.TxData, sizeof(uint8_t) * 8);
+//	memmove(sendData, stm32_1.TxData, sizeof(uint8_t) * 8);
+	stm32_1.B.sensor0 = Encoder1;
+	stm32_1.B.sensor1 = Encoder2;
 	TxMailBox = HAL_CAN_GetTxMailboxesFreeLevel(&hcan2);
 	HAL_CAN_AddTxMessage(&hcan2, &canTxHeader, &stm32_1.TxData[0], &TxMailBox);
 }

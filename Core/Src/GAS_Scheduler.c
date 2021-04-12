@@ -11,13 +11,16 @@
 
 extern uint8_t canRx0Data[8];
 extern volatile uint16_t ValueOfADC[5];
+
 uint8_t pin_state;
+pwmIn_t pwmIn1;
+pwmIn_t pwmIn2;
 
 #define False 0
 #define True 1
 
 volatile int gTimerCnt;
-
+volatile uint8_t pwmChangeFlag;
 Scheduler_task gTask;
 
 void GAS_Scheduler_init(void);
@@ -41,7 +44,7 @@ void GAS_Scheduler_init(void)
 
 //********PWM initialization********
 	GAS_PWM_inputInit();
-	GAS_PWM_outputInit();
+//	GAS_PWM_outputInit();
 
 }
 
@@ -49,15 +52,20 @@ void GAS_Scheduler_init(void)
 
 void GAS_Scheduler_taskCounter_1ms(void)
 {
-	GAS_Vadc_dmaIn();
+//	GAS_Vadc_dmaIn();
 //	GAS_Vadc_getValue();
-//	GAS_Can_sendMessage();
-	GAS_PWM_changeOutput_ch1(ValueOfADC[0]);
+
+
+//	GAS_PWM_changeOutput_ch1(ValueOfADC[0]);
 }
 
 void GAS_Scheduler_taskCounter_10ms(void)
 {
 //	GAS_Can_sendMessage();
+	if (pwmChangeFlag){
+		GAS_Can_sendMessage(pwmIn1.angle,pwmIn2.angle);
+		pwmChangeFlag = False;
+	}
 }
 
 void GAS_Scheduler_taskCounter_100ms(void)
@@ -66,10 +74,10 @@ void GAS_Scheduler_taskCounter_100ms(void)
 }
 void GAS_Scheduler_taskCounter_1000ms(void)
 {
-	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_14);
-		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_15);
-		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_10);
+//	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+//		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_14);
+//		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_15);
+//		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_10);
 }
 
 void HAL_SYSTICK_Callback(void){

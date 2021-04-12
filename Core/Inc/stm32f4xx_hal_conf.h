@@ -28,6 +28,7 @@
 #endif
 
 /* Exported types ------------------------------------------------------------*/
+/* Exported constants --------------------------------------------------------*/
  typedef enum
  {
    HAL_OK       = 0x00U,
@@ -44,9 +45,6 @@
    HAL_UNLOCKED = 0x00U,
    HAL_LOCKED   = 0x01U
  } HAL_LockTypeDef;
-
-/* Exported constants --------------------------------------------------------*/
-
 /* ########################## Module Selection ############################## */
 /**
   * @brief This is the list of modules to be used in the HAL driver
@@ -80,13 +78,13 @@
 /* #define HAL_MMC_MODULE_ENABLED   */
 /* #define HAL_SPI_MODULE_ENABLED   */
 #define HAL_TIM_MODULE_ENABLED
-#define HAL_UART_MODULE_ENABLED
+/* #define HAL_UART_MODULE_ENABLED   */
 /* #define HAL_USART_MODULE_ENABLED   */
 /* #define HAL_IRDA_MODULE_ENABLED   */
 /* #define HAL_SMARTCARD_MODULE_ENABLED   */
 /* #define HAL_SMBUS_MODULE_ENABLED   */
 /* #define HAL_WWDG_MODULE_ENABLED   */
-#define HAL_PCD_MODULE_ENABLED
+/* #define HAL_PCD_MODULE_ENABLED   */
 /* #define HAL_HCD_MODULE_ENABLED   */
 /* #define HAL_DSI_MODULE_ENABLED   */
 /* #define HAL_QSPI_MODULE_ENABLED   */

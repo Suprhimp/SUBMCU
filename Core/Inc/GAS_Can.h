@@ -34,6 +34,6 @@ typedef union{
 extern stm32_msg_t stm32_1;
 
 extern void GAS_Can_init(void);
-extern void GAS_Can_sendMessage(uint8_t sendData[8]);
+extern void GAS_Can_sendMessage(uint16_t Encoder1, uint16_t Encoder2);
 extern void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan);
 #endif /* SRC_GETANDSEND_H_ */
