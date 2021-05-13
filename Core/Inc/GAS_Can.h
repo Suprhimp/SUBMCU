@@ -18,12 +18,9 @@ typedef union{
 	uint8_t TxData[8];
 	uint8_t RxData[8];
 	struct{
-		unsigned int sensor0 : 12;
-		unsigned int sensor1 : 12;
-		unsigned int sensor2 : 12;
-		unsigned int sensor3 : 12;
-		unsigned int sensor4 : 12;
-		unsigned int reserved: 4;
+		unsigned int isUpdated;
+		unsigned int Sensor0 : 16;
+		unsigned int Sensor1 : 16;
 
 	}__attribute__((aligned(1),packed)) B;
 
@@ -34,6 +31,6 @@ typedef union{
 extern stm32_msg_t stm32_1;
 
 extern void GAS_Can_init(void);
-extern void GAS_Can_sendMessage(uint16_t Encoder1, uint16_t Encoder2);
+extern void GAS_Can_sendMessage(uint8_t isUpdated, uint16_t Encoder1, uint16_t Encoder2);
 extern void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan);
 #endif /* SRC_GETANDSEND_H_ */

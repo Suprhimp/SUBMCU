@@ -17,7 +17,7 @@ uint32_t TxMailBox;
 stm32_msg_t stm32_1;
 stm32_msg_t stm32_2;
 stm32_msg_t TC237;
-uint32_t STM32_ID = 0x32F103A;
+uint32_t STM32_ID = 0x32F405A;
 uint32_t STM32_ID2 = 0x32F103B;
 uint32_t TC237_ID = 0x237;
 
@@ -25,7 +25,7 @@ uint32_t TC237_ID = 0x237;
 void GAS_Can_txSetting(void);
 void GAS_Can_rxSetting(void);
 void GAS_Can_init(void);
-void GAS_Can_sendMessage(uint16_t Encoder1, uint16_t Encoder2);
+void GAS_Can_sendMessage(uint8_t isUpdated, uint16_t Encoder1, uint16_t Encoder2);
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan);
 void HAL_CAN_ErrorCallback(CAN_HandleTypeDef* hcan);
 //void GAS_Can_recieveMessage(CAN_HandleTypeDef *hcan);
@@ -110,15 +110,15 @@ void GAS_Can_init(void)
 
 }
 
-void GAS_Can_sendMessage(uint16_t Encoder1, uint16_t Encoder2)
+void GAS_Can_sendMessage(uint8_t isUpdated, uint16_t Encoder0, uint16_t Encoder1)
 {
 	/*
 	 * CAN send message function
 	 * send Message data with sendData[8]
 	 */
-//	memmove(sendData, stm32_1.TxData, sizeof(uint8_t) * 8);
-	stm32_1.B.sensor0 = Encoder1;
-	stm32_1.B.sensor1 = Encoder2;
+	stm32_1.B.isUpdated = isUpdated;
+	stm32_1.B.Sensor0 = Encoder0;
+	stm32_1.B.Sensor1 = Encoder1;
 	TxMailBox = HAL_CAN_GetTxMailboxesFreeLevel(&hcan2);
 	HAL_CAN_AddTxMessage(&hcan2, &canTxHeader, &stm32_1.TxData[0], &TxMailBox);
 }
