@@ -1,9 +1,9 @@
 core_cm4.h:1816:22:__NVIC_SetPriority	16	static
 core_cm4.h:2022:26:SysTick_Config	16	static
-GAS_Scheduler.c:34:6:GAS_Scheduler_init	8	static
-GAS_Scheduler.c:53:6:GAS_Scheduler_taskCounter_1ms	4	static
-GAS_Scheduler.c:62:6:GAS_Scheduler_taskCounter_10ms	8	static
-GAS_Scheduler.c:71:6:GAS_Scheduler_taskCounter_100ms	4	static
-GAS_Scheduler.c:75:6:GAS_Scheduler_taskCounter_1000ms	4	static
-GAS_Scheduler.c:83:6:HAL_SYSTICK_Callback	4	static
-GAS_Scheduler.c:124:6:GAS_Scheduler	8	static
+GAS_Scheduler.c:36:6:GAS_Scheduler_init	8	static
+GAS_Scheduler.c:55:6:GAS_Scheduler_taskCounter_1ms	8	static
+GAS_Scheduler.c:63:6:GAS_Scheduler_taskCounter_10ms	8	static
+GAS_Scheduler.c:72:6:GAS_Scheduler_taskCounter_100ms	4	static
+GAS_Scheduler.c:76:6:GAS_Scheduler_taskCounter_1000ms	4	static
+GAS_Scheduler.c:84:6:HAL_SYSTICK_Callback	4	static
+GAS_Scheduler.c:125:6:GAS_Scheduler	8	static

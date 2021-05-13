@@ -45,6 +45,7 @@
    HAL_UNLOCKED = 0x00U,
    HAL_LOCKED   = 0x01U
  } HAL_LockTypeDef;
+
 /* ########################## Module Selection ############################## */
 /**
   * @brief This is the list of modules to be used in the HAL driver

@@ -34,14 +34,14 @@ void GAS_PWM_inputInit(void)
 	HAL_TIM_IC_Start_IT(&htim8, TIM_CHANNEL_2);
 	HAL_TIM_IC_Start_IT(&htim1, TIM_CHANNEL_1);
 	HAL_TIM_IC_Start_IT(&htim1, TIM_CHANNEL_2);
-	HAL_TIM_IC_Start_IT(&htim4, TIM_CHANNEL_1);
-	HAL_TIM_IC_Start_IT(&htim4, TIM_CHANNEL_2);
+//	HAL_TIM_IC_Start_IT(&htim4, TIM_CHANNEL_1);
+//	HAL_TIM_IC_Start_IT(&htim4, TIM_CHANNEL_2);
 }
 
 void GAS_PWM_outputInit(void)
 {
-	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
-	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
+//	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
+	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
 
 }
 
@@ -62,10 +62,10 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 		GAS_PWM_Check(htim, &pwmIn2);
 		pwmChangeFlag = 1;
 	}
-	if(htim ->Instance == TIM4){
-		GAS_PWM_Check2(htim, &pwmIn3);
-		pwmChangeFlag = 1;
-	}
+//	if(htim ->Instance == TIM4){
+//		GAS_PWM_Check2(htim, &pwmIn3);
+//		pwmChangeFlag = 1;
+//	}
 }
 
 void GAS_PWM_changeOutput_ch1(uint16_t input)
@@ -74,7 +74,7 @@ void GAS_PWM_changeOutput_ch1(uint16_t input)
 	 * PWM change duty cycle function
 	 * Change duty cycle by changing register CCR directly
 	 */
-	TIM1->CCR1=input/10;
+	TIM4->CCR1=input/10;
 }
 
 void GAS_PWM_Check(TIM_HandleTypeDef *htim, pwmIn_t *pwmIn){

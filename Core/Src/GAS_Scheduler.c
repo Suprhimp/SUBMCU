@@ -23,6 +23,8 @@ volatile int gTimerCnt;
 volatile uint8_t pwmChangeFlag;
 Scheduler_task gTask;
 
+volatile uint16_t pwm;
+
 void GAS_Scheduler_init(void);
 void GAS_Scheduler_taskCounter_1ms(void);
 void GAS_Scheduler_taskCounter_10ms(void);
@@ -44,7 +46,7 @@ void GAS_Scheduler_init(void)
 
 //********PWM initialization********
 	GAS_PWM_inputInit();
-//	GAS_PWM_outputInit();
+	GAS_PWM_outputInit();
 
 }
 
@@ -55,8 +57,7 @@ void GAS_Scheduler_taskCounter_1ms(void)
 //	GAS_Vadc_dmaIn();
 //	GAS_Vadc_getValue();
 
-
-//	GAS_PWM_changeOutput_ch1(ValueOfADC[0]);
+	GAS_PWM_changeOutput_ch1(200);
 }
 
 void GAS_Scheduler_taskCounter_10ms(void)
