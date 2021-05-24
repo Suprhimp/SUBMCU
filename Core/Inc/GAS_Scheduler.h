@@ -11,6 +11,7 @@
 #include "GAS_Can.h"
 #include "GAS_Vadc.h"
 #include "GAS_PWM.h"
+#include "GAS_Shock.h"
 
 typedef struct
 {

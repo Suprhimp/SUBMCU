@@ -1,6 +1,7 @@
 "Core/Src/GAS_Can.o"
 "Core/Src/GAS_PWM.o"
 "Core/Src/GAS_Scheduler.o"
+"Core/Src/GAS_Shock.o"
 "Core/Src/GAS_Vadc.o"
 "Core/Src/adc.o"
 "Core/Src/can.o"

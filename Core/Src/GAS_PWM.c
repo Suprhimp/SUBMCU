@@ -52,7 +52,6 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 	 * One PWM input per one htim channel(because of TIM counter)
 	 * Period, width, duty cycle, frequency can be calculated.
 	 */
-
 	if(htim ->Instance == TIM8)
 	{
 		GAS_PWM_Check(htim, &pwmIn1);

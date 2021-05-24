@@ -1,5 +1,5 @@
-Core/Src/GAS_Scheduler.o: ../Core/Src/GAS_Scheduler.c \
- ../Core/Inc/GAS_Scheduler.h ../Core/Inc/GAS_Can.h \
+Core/Src/GAS_Shock.o: ../Core/Src/GAS_Shock.c ../Core/Inc/GAS_Shock.h \
+ ../Core/Inc/GAS_CAN.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h \
@@ -35,12 +35,11 @@ Core/Src/GAS_Scheduler.o: ../Core/Src/GAS_Scheduler.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
  ../Core/Inc/can.h ../Core/Inc/main.h ../Core/Inc/GAS_Vadc.h \
  ../Core/Inc/dma.h ../Core/Inc/adc.h ../Core/Inc/GAS_PWM.h \
- ../Core/Inc/tim.h ../Core/Inc/GAS_Shock.h ../Core/Inc/GAS_CAN.h \
  ../Core/Inc/tim.h
 
-../Core/Inc/GAS_Scheduler.h:
+../Core/Inc/GAS_Shock.h:
 
-../Core/Inc/GAS_Can.h:
+../Core/Inc/GAS_CAN.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h:
 
@@ -119,11 +118,5 @@ Core/Src/GAS_Scheduler.o: ../Core/Src/GAS_Scheduler.c \
 ../Core/Inc/adc.h:
 
 ../Core/Inc/GAS_PWM.h:
-
-../Core/Inc/tim.h:
-
-../Core/Inc/GAS_Shock.h:
-
-../Core/Inc/GAS_CAN.h:
 
 ../Core/Inc/tim.h:

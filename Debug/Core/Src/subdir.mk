@@ -7,6 +7,7 @@ C_SRCS += \
 ../Core/Src/GAS_Can.c \
 ../Core/Src/GAS_PWM.c \
 ../Core/Src/GAS_Scheduler.c \
+../Core/Src/GAS_Shock.c \
 ../Core/Src/GAS_Vadc.c \
 ../Core/Src/adc.c \
 ../Core/Src/can.c \
@@ -26,6 +27,7 @@ OBJS += \
 ./Core/Src/GAS_Can.o \
 ./Core/Src/GAS_PWM.o \
 ./Core/Src/GAS_Scheduler.o \
+./Core/Src/GAS_Shock.o \
 ./Core/Src/GAS_Vadc.o \
 ./Core/Src/adc.o \
 ./Core/Src/can.o \
@@ -45,6 +47,7 @@ C_DEPS += \
 ./Core/Src/GAS_Can.d \
 ./Core/Src/GAS_PWM.d \
 ./Core/Src/GAS_Scheduler.d \
+./Core/Src/GAS_Shock.d \
 ./Core/Src/GAS_Vadc.d \
 ./Core/Src/adc.d \
 ./Core/Src/can.d \
@@ -68,6 +71,8 @@ Core/Src/GAS_PWM.o: ../Core/Src/GAS_PWM.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32F405xx -DUSE_HAL_DRIVER -DDEBUG -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/GAS_PWM.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 Core/Src/GAS_Scheduler.o: ../Core/Src/GAS_Scheduler.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32F405xx -DUSE_HAL_DRIVER -DDEBUG -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/GAS_Scheduler.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
+Core/Src/GAS_Shock.o: ../Core/Src/GAS_Shock.c
+	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32F405xx -DUSE_HAL_DRIVER -DDEBUG -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/GAS_Shock.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 Core/Src/GAS_Vadc.o: ../Core/Src/GAS_Vadc.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32F405xx -DUSE_HAL_DRIVER -DDEBUG -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/GAS_Vadc.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 Core/Src/adc.o: ../Core/Src/adc.c

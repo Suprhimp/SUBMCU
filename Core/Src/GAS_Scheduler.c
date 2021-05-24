@@ -46,6 +46,8 @@ void GAS_Scheduler_init(void)
 	GAS_PWM_inputInit();
 //	GAS_PWM_outputInit();
 
+//********Shock initialization*******
+	GAS_Shock_init();
 }
 
 
@@ -54,18 +56,17 @@ void GAS_Scheduler_taskCounter_1ms(void)
 {
 //	GAS_Vadc_dmaIn();
 //	GAS_Vadc_getValue();
-
-
+	if (pwmChangeFlag){
+		GAS_Shock_Run(&pwmIn1, &pwmIn2 ,pwmChangeFlag);
+		pwmChangeFlag = False;
+	}
 //	GAS_PWM_changeOutput_ch1(ValueOfADC[0]);
 }
 
 void GAS_Scheduler_taskCounter_10ms(void)
 {
 //	GAS_Can_sendMessage();
-	if (pwmChangeFlag){
-		GAS_Can_sendMessage(pwmChangeFlag,pwmIn1.angle,pwmIn2.angle);
-		pwmChangeFlag = False;
-	}
+
 }
 
 void GAS_Scheduler_taskCounter_100ms(void)
