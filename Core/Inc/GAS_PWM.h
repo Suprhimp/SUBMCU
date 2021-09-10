@@ -8,6 +8,13 @@
 #ifndef INC_GAS_PWM_H_
 #define INC_GAS_PWM_H_
 
+#define NONE		0
+#define COOLING		1
+#define SHOCK		2
+
+
+#define MODE		COOLING
+
 #include "tim.h"
 #include "stm32f4xx_hal_tim.h"
 typedef struct{

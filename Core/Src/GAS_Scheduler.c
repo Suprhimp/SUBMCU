@@ -63,10 +63,10 @@ void GAS_Scheduler_taskCounter_1ms(void)
 void GAS_Scheduler_taskCounter_10ms(void)
 {
 //	GAS_Can_sendMessage();
-	if (pwmChangeFlag){
-		GAS_Can_sendMessage(pwmIn1.angle,pwmIn2.angle);
-		pwmChangeFlag = False;
-	}
+//	if (pwmChangeFlag){
+//		GAS_Can_sendMessage(pwmIn1.angle,pwmIn2.angle);
+//		pwmChangeFlag = False;
+//	}
 }
 
 void GAS_Scheduler_taskCounter_100ms(void)
