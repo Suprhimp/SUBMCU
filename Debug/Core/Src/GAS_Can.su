@@ -1,6 +1,5 @@
 GAS_Can.c:33:6:GAS_Can_txSetting	4	static
 GAS_Can.c:47:6:GAS_Can_rxSetting	8	static
 GAS_Can.c:90:6:GAS_Can_init	8	static
-GAS_Can.c:113:6:GAS_Can_sendMessage	16	static
 GAS_Can.c:128:6:HAL_CAN_RxFifo0MsgPendingCallback	16	static
 GAS_Can.c:141:6:HAL_CAN_RxFifo1MsgPendingCallback	16	static

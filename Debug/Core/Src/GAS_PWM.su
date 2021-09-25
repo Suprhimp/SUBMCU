@@ -1,6 +1,6 @@
-GAS_PWM.c:30:6:GAS_PWM_inputInit	8	static
-GAS_PWM.c:41:6:GAS_PWM_outputInit	8	static
-GAS_PWM.c:48:6:HAL_TIM_IC_CaptureCallback	16	static
-GAS_PWM.c:70:6:GAS_PWM_changeOutput_ch1	16	static
-GAS_PWM.c:79:6:GAS_PWM_Check	16	static
-GAS_PWM.c:98:6:GAS_PWM_Check2	16	static
+GAS_PWM.c:34:6:GAS_PWM_inputInit	8	static
+GAS_PWM.c:45:6:GAS_PWM_outputInit	4	static
+GAS_PWM.c:52:6:HAL_TIM_IC_CaptureCallback	16	static
+GAS_PWM.c:74:6:GAS_PWM_changeOutput_ch1	16	static
+GAS_PWM.c:83:6:GAS_PWM_Check	16	static
+GAS_PWM.c:103:6:GAS_PWM_Check2	16	static

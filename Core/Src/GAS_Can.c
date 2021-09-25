@@ -17,9 +17,9 @@ uint32_t TxMailBox;
 stm32_msg_t stm32_1;
 stm32_msg_t stm32_2;
 stm32_msg_t TC237;
-uint32_t STM32_ID = 0x32F405A;
-uint32_t STM32_ID2 = 0x32F103B;
-uint32_t TC237_ID = 0x237;
+uint32_t STM32_ID = 0x405A;
+uint32_t STM32_ID2 = 0x405B;
+uint32_t TC237_ID = 0x275A01;
 
 /*-------------------------Function Prototypes--------------------------------*/
 void GAS_Can_txSetting(void);
@@ -57,7 +57,7 @@ void GAS_Can_rxSetting(void)
 	sFilterConfig.FilterMaskIdHigh = (0x0fffffff<<3)>>16;
 	sFilterConfig.FilterMaskIdLow =(0xffff & (0x0FFFFFFF << 3)) | (1<<2);
 	sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;
-	sFilterConfig.FilterBank = 0;
+	sFilterConfig.FilterBank = 14;
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
 	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
 	sFilterConfig.FilterActivation = ENABLE;
@@ -74,7 +74,7 @@ void GAS_Can_rxSetting(void)
 	 sFilterConfig2.FilterMaskIdHigh = 0x0000;
  	 sFilterConfig2.FilterMaskIdLow = (0xffff & (0x0237 << 3)) | (1<<2);
 	 sFilterConfig2.FilterFIFOAssignment = CAN_RX_FIFO1;
-	 sFilterConfig2.FilterBank = 1;
+	 sFilterConfig2.FilterBank = 15;
 	 sFilterConfig2.FilterMode = CAN_FILTERMODE_IDMASK;
 	 sFilterConfig2.FilterScale = CAN_FILTERSCALE_32BIT;
 	 sFilterConfig2.FilterActivation = ENABLE;
@@ -110,18 +110,18 @@ void GAS_Can_init(void)
 
 }
 
-void GAS_Can_sendMessage(uint8_t isUpdated, uint16_t Encoder0, uint16_t Encoder1)
-{
-	/*
-	 * CAN send message function
-	 * send Message data with sendData[8]
-	 */
-	stm32_1.B.isUpdated = isUpdated;
-	stm32_1.B.Sensor0 = Encoder0;
-	stm32_1.B.Sensor1 = Encoder1;
-	TxMailBox = HAL_CAN_GetTxMailboxesFreeLevel(&hcan2);
-	HAL_CAN_AddTxMessage(&hcan2, &canTxHeader, &stm32_1.TxData[0], &TxMailBox);
-}
+//void GAS_Can_sendMessage(uint8_t isUpdated, uint16_t Encoder0, uint16_t Encoder1)
+//{
+//	/*
+//	 * CAN send message function
+//	 * send Message data with sendData[8]
+//	 */
+//
+//	stm32_1.B.Sensor0 = Encoder0;
+//	stm32_1.B.Sensor1 = Encoder1;
+//	TxMailBox = HAL_CAN_GetTxMailboxesFreeLevel(&hcan2);
+//	HAL_CAN_AddTxMessage(&hcan2, &canTxHeader, &stm32_1.TxData[0], &TxMailBox);
+//}
 
 
 

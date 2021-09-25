@@ -1,7 +1,4 @@
 GAS_Shock.c:42:6:GAS_Shock_init	16	static
-GAS_Shock.c:47:6:GAS_Shock_parse	32	static
-GAS_Shock.c:53:7:GAS_Shock_calculateRoll	32	static
-GAS_Shock.c:66:14:rollCalc	56	static
-GAS_Shock.c:71:5:GAS_Shock_calculateHeave	32	static
-GAS_Shock.c:84:14:heaveCalc	32	static
-GAS_Shock.c:89:6:GAS_Shock_Run	32	static
+GAS_Shock.c:48:6:Front_Encoder	80	static
+GAS_Shock.c:92:6:Rear_Encoder	80	static
+GAS_Shock.c:135:6:GAS_Shock_Run	32	static

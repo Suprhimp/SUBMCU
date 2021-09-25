@@ -16,14 +16,14 @@
 typedef struct{
 	int initAngleR;
 	int initAngleL;
-	int AngleR;
-	int AngleL;
-	float parsedAngleR;
-	float parsedAngleL;
+	unsigned int AngleR;
+	unsigned int AngleL;
+	float Roll;
+	float Heave;
 }ShockAngle;
 
 
 extern ShockAngle angle;
-extern void GAS_Shock_Run(pwmIn_t *pwmIn1, pwmIn_t *pwmIn2 ,int isUpdated);
-
+extern void GAS_Shock_Run(unsigned int Angle1, unsigned int Angle2 ,int isUpdated);
+extern void GAS_Shock_init(int angleR, int angleL);
 #endif /* INC_GAS_SHOCK_H_ */

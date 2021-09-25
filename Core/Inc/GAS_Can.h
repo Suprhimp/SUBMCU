@@ -18,9 +18,10 @@ typedef union{
 	uint8_t TxData[8];
 	uint8_t RxData[8];
 	struct{
-		unsigned int isUpdated;
-		unsigned int Sensor0 : 16;
-		unsigned int Sensor1 : 16;
+		unsigned int AngleR : 16;
+		unsigned int AngleL : 16;
+		unsigned int Roll : 16;
+		unsigned int Heave : 16;
 
 	}__attribute__((aligned(1),packed)) B;
 

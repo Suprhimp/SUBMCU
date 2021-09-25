@@ -19,13 +19,13 @@
 #define RockerWingH_R 64
 #define RockerShaft_R 160
 
-#define SeraRisingTime 265
+#define SeraRisingTime 265	//FR
 #define SeraMaxWidth 8330
 
-#define SeraRisingTime2 133
+#define SeraRisingTime2 133	//FL\\
 #define SeraMaxWidth2 4164
 
-const double PI = 3.1415926;
+const float PI = 3.1415926;
 const float i = 90.7;
 
 ShockAngle angle;
@@ -37,70 +37,121 @@ static float rollCalc(int RW,int RS, float d);
 float GAS_Shock_calculateRoll(float Rd, float Ld, int Location);
 static float heaveCalc(int RW, int d);
 void GAS_Shock_parse(ShockAngle *angle);
-void GAS_Shock_Run(pwmIn_t *pwmIn1, pwmIn_t *pwmIn2 ,int isUpdated);
+void GAS_Shock_Run(unsigned int Angle1, unsigned int Angle2 ,int isUpdated);
 
 void GAS_Shock_init(int angleR, int angleL){
 	angle.initAngleR = angleR;
 	angle.initAngleL = angleL;
 }
 
-void GAS_Shock_parse(ShockAngle *angle){
-	int initAngle=907;
-	angle->parsedAngleR = (initAngle + angle->AngleR - angle->initAngleR)*PI/3600;
-	angle->parsedAngleL = (initAngle + angle->AngleL - angle->initAngleL)*PI/3600;
+
+void Front_Encoder(){
+
+
+    float defAngLeft = (float)angle.initAngleL*PI/1800;
+    float defAngRight = (float)angle.initAngleR*PI/1800;
+    float changeAngLeft;//좌측 각도 변화량
+    float changeAngRigt;//우측 각도변화량
+    float strokeChangeLeft;//왼쪽에 의한 압축량
+    float strokeChangeRight;//우측에 의한 압축량
+    float totalRoll;//합
+    float heaveLeft;//왼쪽에 의한 히브쇽 압축량
+    float heaveRight;//우측에 의한 히브쇽 압축량
+    float totalHeave;
+
+    // 롤 변화량 계산
+    //좌측 엔코더 각도 변화량(라디안)
+    changeAngLeft = fabs((float)angle.AngleL)*PI/1800 - fabs(defAngLeft);
+    //우측 엔코더 각도변화량(라디안)
+    changeAngRigt = fabs((float)angle.AngleR)*PI/1800 - fabs(defAngRight);
+
+    float midRes_a = pow(145*145-(52*sin(defAngLeft))*(52*sin(defAngLeft)) , 0.5);
+    float midRes_b = pow(145*145-(52*sin(defAngLeft+changeAngLeft))*(52*sin(defAngLeft+changeAngLeft)) , 0.5);
+    float midRes_c = pow(145*145-(52*sin(defAngRight+changeAngRigt))*(52*sin(defAngRight+changeAngRigt)) , 0.5);
+    float midRes_d = pow(145*145-(52*sin(defAngRight))*(52*sin(defAngRight)) , 0.5);
+
+    strokeChangeLeft = (52*cos(defAngLeft) + fabs(midRes_a) )-(52*cos(defAngLeft+changeAngLeft) + fabs(midRes_b) );
+
+    strokeChangeRight = (52*cos(defAngRight)+ fabs(midRes_a) )-(52*cos(defAngRight+changeAngRigt) + fabs(midRes_c) );
+
+    totalRoll = strokeChangeRight + strokeChangeLeft;
+
+    //히브쇽 변화량 계산
+    heaveLeft = -52*cos(defAngLeft)+52*cos(defAngLeft-changeAngLeft);
+
+    heaveRight = -52*cos(defAngRight)+52*cos(defAngRight+changeAngRigt);
+
+    totalHeave = heaveLeft + heaveRight ;
+    //printf("%f, %f",strokeChangeLeft, strokeChangeRight);
+    angle.Roll = fabs(totalRoll);
+    angle.Heave = fabs(totalHeave);
 }
 
-float GAS_Shock_calculateRoll(float Rd, float Ld, int Location){
-	int d1=0,d2=0;
-	if (Location == Shock_Front){
-		d1 = rollCalc(RockerWing_F,RockerShaft_F,Rd);
-		d2 = rollCalc(RockerWing_F,RockerShaft_F,Ld);
-	}
-	if (Location == Shock_Rear){
-		d1 = rollCalc(RockerWing_R,RockerShaft_R,Rd);
-		d2 = rollCalc(RockerWing_R,RockerShaft_R,Ld);
-	}
-	return d1+d2;
+
+
+void Rear_Encoder(){
+
+    float defAngLeft = (float)angle.initAngleL*PI/1800;
+    float defAngRight = (float)angle.initAngleR*PI/1800;
+    float changeAngLeft;//좌측 각도 변화량
+    float changeAngRigt;//우측 각도변화량
+    float strokeChangeLeft;//왼쪽에 의한 압축량
+    float strokeChangeRight;//우측에 의한 압축량
+    float totalRoll;//합
+    float heaveLeft;//왼쪽에 의한 히브쇽 압축량
+    float heaveRight;//우측에 의한 히브쇽 압축량
+    float totalHeave;
+
+    // 롤 변화량 계산
+    //좌측 엔코더 각도 변화량(라디안)
+    changeAngLeft = fabs((float)angle.AngleL)*PI/1800 - fabs(defAngLeft);
+    //우측 엔코더 각도변화량(라디안)
+    changeAngRigt = fabs((float)angle.AngleR)*PI/1800 - fabs(defAngRight);
+
+    float midRes_a = pow(160*160-(71*sin(defAngLeft))*(71*sin(defAngLeft)) , 0.5);
+    float midRes_b = pow(160*160-(71*sin(defAngLeft+changeAngLeft))*(71*sin(defAngLeft+changeAngLeft)) , 0.5);
+    float midRes_c = pow(160*160-(71*sin(defAngRight+changeAngRigt))*(71*sin(defAngRight+changeAngRigt)) , 0.5);
+    float midRes_d = pow(160*160-(71*sin(defAngRight))*(71*sin(defAngRight)) , 0.5);
+
+    strokeChangeLeft = (71*cos(defAngLeft) + fabs(midRes_a) )-(71*cos(defAngLeft+changeAngLeft) + fabs(midRes_b) );
+
+    strokeChangeRight = (71*cos(defAngRight)+ fabs(midRes_a) )-(71*cos(defAngRight+changeAngRigt) + fabs(midRes_c) );
+
+    totalRoll = strokeChangeRight + strokeChangeLeft;
+
+    //히브쇽 변화량 계산
+    heaveLeft = -64*cos(defAngLeft)+64*cos(defAngLeft-changeAngLeft);
+
+    heaveRight = -64*cos(defAngRight)+64*cos(defAngRight+changeAngRigt);
+
+    totalHeave = heaveLeft + heaveRight ;
+    //printf("%f, %f",strokeChangeLeft, strokeChangeRight);
+    angle.Roll = fabs(totalRoll);
+    angle.Heave = fabs(totalHeave);
 }
 
-static float rollCalc(int RW,int RS, float d){
 
-	return ((RW*cos(i)+sqrt(pow(RS,2)-pow(RW*sin(i),2)))-(RW*cos(i+d)+sqrt(pow(RS,2)-pow(RW*sin(i+d),2))));
-}
 
-int GAS_Shock_calculateHeave(float Rd, float Ld, int Location){
-	int d1,d2;
-	if (Location == Shock_Front){
-		d1 = heaveCalc(RockerWing_F,Rd);
-		d2 = heaveCalc(RockerWing_F,Ld);
-	}
-	if (Location == Shock_Rear){
-		d1 = heaveCalc(RockerWingH_R,Rd);
-		d2 = heaveCalc(RockerWingH_R,Ld);
-	}
-	return d1+d2;
-}
-
-static float heaveCalc(int RW, int d){
-
-	return (52*cos(i-d)-RW*cos(i));
-}
-
-void GAS_Shock_Run(pwmIn_t *pwmIn1, pwmIn_t *pwmIn2 ,int isUpdated){
+void GAS_Shock_Run(uint Angle1, uint Angle2 ,int isUpdated){
 
 	uint32_t TxMailBox;
 
-	angle.AngleR = (3600*(pwmIn1->Width-SeraRisingTime)/(SeraMaxWidth-SeraRisingTime));
+	angle.AngleR = Angle1;
 	if(angle.AngleR>=3600)angle.AngleR=0;
 
-	angle.AngleL = (3600*(pwmIn2->Width-SeraRisingTime)/(SeraMaxWidth-SeraRisingTime));
+	angle.AngleL = Angle2;
 	if(angle.AngleL>=3600)angle.AngleL=0;
 
-	GAS_Shock_parse(&angle);
+	if (LOCATION == Shock_Front){
+		Front_Encoder();
+	}else{
 
-	stm32_1.B.isUpdated = isUpdated;
-	stm32_1.B.Sensor0 = GAS_Shock_calculateRoll(angle.parsedAngleR,angle.parsedAngleL,LOCATION);
-	stm32_1.B.Sensor1 = GAS_Shock_calculateHeave(angle.parsedAngleR,angle.parsedAngleL,LOCATION);
+	}
+
+	stm32_1.B.AngleR = angle.AngleR;
+	stm32_1.B.AngleL = angle.AngleL;
+	stm32_1.B.Roll = (unsigned int)(angle.Roll*10);
+//	stm32_1.B.Heave = (unsigned int)(angle.Heave*10);
 	TxMailBox = HAL_CAN_GetTxMailboxesFreeLevel(&hcan2);
 	HAL_CAN_AddTxMessage(&hcan2, &canTxHeader, &stm32_1.TxData[0], &TxMailBox);
 
